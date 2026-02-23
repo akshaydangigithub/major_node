@@ -21,9 +21,13 @@ export const GetUserData = catchAsyncErrors(async (req, res, next) => {
 
 export const RegisterUser = catchAsyncErrors(async (req, res, next) => {
 
-  const isAdminExists = await UserModel.findOne({ role: "admin" });
+  if (req.body.role === "admin") {
 
-  if (isAdminExists) return next(new ErrorHandler("Admin Already exists", 500))
+    const isAdminExists = await UserModel.findOne({ role: "admin" });
+
+    if (isAdminExists) return next(new ErrorHandler("Admin Already exists", 500))
+  }
+
 
   const salt = await bcrypt.genSalt(10);
 

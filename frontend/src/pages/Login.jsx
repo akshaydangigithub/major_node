@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthProvider } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -48,7 +48,20 @@ const Login = () => {
           type="password"
           placeholder="******"
         />
-        <button type="submit">Submit</button>
+
+        {/* if dont have an account */}
+        <div className="text-center">
+          <p className="text-gray-600">
+            Don't have an account?{" "}
+            <Link to="/signup" className="text-blue-500 hover:underline">
+              Sign Up
+            </Link>
+          </p>
+        </div>
+
+        <button className="p-2.5 bg-amber-500 rounded-lg" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

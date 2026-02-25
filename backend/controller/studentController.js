@@ -11,6 +11,14 @@ export const Init = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+export const GetStudent = catchAsyncErrors(async (req, res, next) => {
+  const student = await StudentModel.findOne({ userId: req.user.id }).populate('internships')
+
+  if (!student) return next(new ErrorHandler("Student profile not found", 404));
+
+  successResponse(res, 200, "Student details fetched successfully", student);
+});
+
 export const CreateEducation = catchAsyncErrors(async (req, res, next) => {
   const user = await UserModel.findById(req.user.id);
 

@@ -13,7 +13,7 @@ const useInternships = () => {
         if (response.data.success) {
           setInternships(response.data.data);
         }
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.error("Error fetching internships:", error);
       } finally {

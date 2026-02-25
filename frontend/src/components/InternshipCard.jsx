@@ -1,5 +1,6 @@
-import React from "react";
-// Optional: import { Calendar, DollarSign, Users, Briefcase } from "lucide-react";
+import React, { useContext } from "react";
+import { applyForInternship } from "../api/internship";
+import { StudentProvider } from "../context/StudentContext";
 
 const InternshipCard = ({ internship }) => {
   // Destructuring for cleaner code
@@ -14,8 +15,19 @@ const InternshipCard = ({ internship }) => {
     skills,
   } = internship;
 
-  // Assuming skills might come as a string or array
+  const { studentData, fetchStudentData } = useContext(StudentProvider);
+
   const skillList = Array.isArray(skills) ? skills : skills.split(", ");
+
+  const applyInternship = async () => {
+    await applyForInternship(internship._id);
+
+    await fetchStudentData();
+  };
+
+  const isInternshipApplied = studentData.internships.some(
+    (appliedInternship) => appliedInternship._id === internship._id,
+  );
 
   return (
     <div className="bg-white border border-gray-100 shadow-sm rounded-xl p-6 m-4 hover:shadow-md transition-all duration-300 group">
@@ -71,8 +83,11 @@ const InternshipCard = ({ internship }) => {
       </div>
 
       {/* Call to Action */}
-      <button className="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm">
-        Apply Now
+      <button
+        onClick={isInternshipApplied ? null : applyInternship}
+        className={`w-full py-2.5 px-4  text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm ${isInternshipApplied ? "bg-green-600 hover:bg-green-700 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}`}
+      >
+        {isInternshipApplied ? "Applied" : "Apply Now"}
       </button>
     </div>
   );

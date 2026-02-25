@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../components/Navbar";
 import useInternships from "../hooks/useInternships";
 import InternshipCard from "../components/InternshipCard";
+import { StudentProvider } from "../context/StudentContext";
 
 const Home = () => {
   // Assuming useInternships might also provide a loading state
   const { internships, loading } = useInternships();
+  const { studentData } = useContext(StudentProvider);
+
+  console.log(studentData);
 
   return (
     <div className="min-h-screen bg-gray-50">

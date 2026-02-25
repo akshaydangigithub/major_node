@@ -12,13 +12,17 @@ import {
   DeleteProject,
   CreateSkill,
   DeleteSkill,
-  ApplyInternship
+  ApplyInternship,
+  GetStudent
 } from "../controller/studentController.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();
 
 router.get("/", Init);
+
+// get student details
+router.get("/me", isAuthenticated, GetStudent);
 
 // education create
 router.post("/education", isAuthenticated, CreateEducation);

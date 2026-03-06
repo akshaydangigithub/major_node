@@ -9,7 +9,7 @@ const Home = () => {
   const { internships, loading } = useInternships();
   const { studentData } = useContext(StudentProvider);
 
-  console.log(studentData);
+  // console.log(studentData);
 
   return (
     <div className="min-h-screen bg-gray-50">

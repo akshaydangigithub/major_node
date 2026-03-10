@@ -6,7 +6,7 @@ const Navbar = () => {
   const { user, Logout } = useContext(AuthProvider);
 
   return (
-    <div className="flex items-center justify-between bg-gray-100 py-4 px-10">
+    <div className="flex items-center justify-between bg-gray-100 h-20 px-10 sticky top-0 z-50 ">
       <img
         src="https://upload.wikimedia.org/wikipedia/en/8/8b/Internshala_company_logo.png"
         className="w-32 h-16 object-contain"

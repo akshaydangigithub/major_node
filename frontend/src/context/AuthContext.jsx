@@ -80,6 +80,7 @@ const AuthContext = ({ children }) => {
         isAuthenticated: !!user,
         Logout,
         RegisterUser,
+        fetUserData,
       }}
     >
       {children}

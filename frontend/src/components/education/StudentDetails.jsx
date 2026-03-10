@@ -8,21 +8,6 @@ const StudentDetails = () => {
       <div>
         <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
           {user?.name}
-          <button className="text-gray-400 hover:text-gray-600">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-              />
-            </svg>
-          </button>
         </h2>
         <div className="text-gray-600 mt-3 space-y-1 text-sm">
           <p>{user?.email}</p>

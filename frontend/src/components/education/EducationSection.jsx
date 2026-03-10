@@ -2,11 +2,16 @@ import React, { useContext, useState } from "react";
 import Modal from "../Modal";
 import EducationForm from "./EducationForm";
 import { StudentProvider } from "../../context/StudentContext";
+import {
+  createEducation,
+  deleteEducation,
+  updateEducation,
+} from "../../api/education";
 
 const EducationSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingIndex, setEditingIndex] = useState(null); // Tracks which item is being edited
-  const { studentData } = useContext(StudentProvider);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const { studentData, fetchStudentData } = useContext(StudentProvider);
 
   const educationList = studentData?.education || [];
 
@@ -19,6 +24,23 @@ const EducationSection = () => {
     setIsModalOpen(true);
   };
   const handleCloseModal = () => setIsModalOpen(false);
+
+  const handleCreateEducation = async (educationData) => {
+    await createEducation(educationData);
+    await fetchStudentData();
+    handleCloseModal();
+  };
+
+  const handleUpdateEducation = async (educationData) => {
+    await updateEducation(educationList[editingIndex]._id, educationData);
+    await fetchStudentData();
+    handleCloseModal();
+  };
+
+  const handleDeleteEducation = async (educationId) => {
+    await deleteEducation(educationId);
+    await fetchStudentData();
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 border-b border-gray-200 pb-8 mt-8">
@@ -51,7 +73,10 @@ const EducationSection = () => {
                   />
                 </svg>
               </button>
-              <button className="hover:text-red-500">
+              <button
+                onClick={() => handleDeleteEducation(edu._id)}
+                className="hover:text-red-500"
+              >
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -108,7 +133,8 @@ const EducationSection = () => {
         title="Graduation details/ Post graduation details"
       >
         <EducationForm
-          onSave={handleCloseModal}
+          onSave={handleCreateEducation}
+          onUpdate={handleUpdateEducation}
           initialData={
             editingIndex !== null ? educationList[editingIndex] : null
           }

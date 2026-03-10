@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = ({ items = [] }) => {
   return (
-    <aside className="w-72 h-screen bg-white text-gray-800 flex flex-col shadow-lg border-r border-gray-200">
+    <aside className="w-72 h-[calc(100vh-80px)] bg-white text-gray-800 flex flex-col shadow-lg border-r border-gray-200 sticky top-20">
       {/* Sidebar Navigation */}
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1">
@@ -22,13 +22,6 @@ const Sidebar = ({ items = [] }) => {
           ))}
         </ul>
       </nav>
-
-      {/* Optional Footer/Logout Area */}
-      <div className="p-4 border-t border-gray-200">
-        <button className="w-full text-left px-4 py-2 rounded-lg text-red-600 font-medium hover:bg-red-50 hover:text-red-700 transition-colors duration-200">
-          Log Out
-        </button>
-      </div>
     </aside>
   );
 };

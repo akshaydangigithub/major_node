@@ -7,10 +7,10 @@ import { AuthProvider } from "../../context/AuthContext";
 const ResumePage = () => {
   const { studentData } = useContext(StudentProvider);
   const { user } = useContext(AuthProvider);
-  console.log(studentData, user);
+  // console.log(studentData, user);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50">
       <header className="text-center py-8">
         <h1 className="text-3xl font-bold text-gray-800">My Resume</h1>
       </header>

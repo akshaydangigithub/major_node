@@ -7,6 +7,7 @@ const Layout = () => {
   const adminMenu = [
     { label: "Dashboard", path: "/student/dashboard", icon: "📊" },
     { label: "Resume", path: "/student/resume", icon: "📄" },
+    { label: "Profile", path: "/student/profile", icon: "👤" },
   ];
 
   return (

@@ -3,13 +3,13 @@ import Navbar from "../components/Navbar";
 import useInternships from "../hooks/useInternships";
 import InternshipCard from "../components/InternshipCard";
 import { StudentProvider } from "../context/StudentContext";
+import { AuthProvider } from "../context/AuthContext";
 
 const Home = () => {
-  // Assuming useInternships might also provide a loading state
   const { internships, loading } = useInternships();
-  const { studentData } = useContext(StudentProvider);
+  const { user } = useContext(AuthProvider);
 
-  // console.log(studentData);
+  console.log(internships);
 
   return (
     <div className="min-h-screen bg-gray-50">

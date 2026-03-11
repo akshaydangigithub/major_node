@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { applyForInternship } from "../api/internship";
 import { StudentProvider } from "../context/StudentContext";
+import { AuthProvider } from "../context/AuthContext";
 
 const InternshipCard = ({ internship }) => {
   // Destructuring for cleaner code
@@ -16,6 +17,7 @@ const InternshipCard = ({ internship }) => {
   } = internship;
 
   const { studentData, fetchStudentData } = useContext(StudentProvider);
+  const { user } = useContext(AuthProvider);
 
   const skillList = Array.isArray(skills) ? skills : skills.split(", ");
 
@@ -25,7 +27,7 @@ const InternshipCard = ({ internship }) => {
     await fetchStudentData();
   };
 
-  const isInternshipApplied = studentData.internships.some(
+  const isInternshipApplied = studentData?.internships.some(
     (appliedInternship) => appliedInternship._id === internship._id,
   );
 
@@ -83,12 +85,14 @@ const InternshipCard = ({ internship }) => {
       </div>
 
       {/* Call to Action */}
-      <button
-        onClick={isInternshipApplied ? null : applyInternship}
-        className={`w-full py-2.5 px-4  text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm ${isInternshipApplied ? "bg-green-600 hover:bg-green-700 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}`}
-      >
-        {isInternshipApplied ? "Applied" : "Apply Now"}
-      </button>
+      {user && user.role === "student" && (
+        <button
+          onClick={isInternshipApplied ? null : applyInternship}
+          className={`w-full py-2.5 px-4  text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm ${isInternshipApplied ? "bg-green-600 hover:bg-green-700 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}`}
+        >
+          {isInternshipApplied ? "Applied" : "Apply Now"}
+        </button>
+      )}
     </div>
   );
 };

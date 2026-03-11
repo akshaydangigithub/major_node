@@ -5,12 +5,15 @@ import App from "./App.jsx";
 import AuthContext from "./context/AuthContext.jsx";
 import { Toaster } from "react-hot-toast";
 import StudentContext from "./context/StudentContext.jsx";
+import EmployeeContext from "./context/EmployeeContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthContext>
       <StudentContext>
-        <App />
+        <EmployeeContext>
+          <App />
+        </EmployeeContext>
       </StudentContext>
       <Toaster />
     </AuthContext>
